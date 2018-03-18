@@ -9,7 +9,8 @@
   "dependencies": {
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.1",
-    "react-native-navigation": "^1.1.407"
+    "react-native-navigation": "^1.1.407",
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",

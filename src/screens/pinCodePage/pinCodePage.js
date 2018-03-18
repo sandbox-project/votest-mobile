@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput, Button, Alert} from 'react-native';
+import { View, Text, TextInput, Button} from 'react-native';
 import s from './pinCodePageStyle';
 
 class pinCodePage extends Component {
@@ -9,19 +9,20 @@ class pinCodePage extends Component {
   }
 
   _vote() {
-    return fetch(`http://192.168.1.166:8000/api/v1/poll/${this.state.text}`)
+    return fetch(`https://votest-api.herokuapp.com/api/poll/${this.state.text}`)
       .then(response => response.json())
       .then(data => {
         let poll = data.response;
-        Alert.alert(
-          `Question: ${poll.question}`,
-          `ChartType: ${poll.type}`,
-          [
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ],
-          { cancelable: false }
-        )
+        this.props.navigator.push({
+          screen: 'votestMobile.votingPage',
+          passProps: { 
+            poll,
+            id: this.state.text,
+          },
+          navigatorStyle: {
+            navBarHidden: true
+          }
+        });
       })
   }
 
